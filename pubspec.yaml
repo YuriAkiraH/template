@@ -1,6 +1,6 @@
 name: template
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -9,13 +9,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_reactive_value: ^2.0.1
+  flutter_mobx: ^2.2.1+1
   get_it: ^8.0.2
+  loader_overlay: ^4.0.3
+  mobx: ^2.4.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  mobx_codegen: ^2.6.2
+  build_runner: ^2.4.13
 
 flutter:
   uses-material-design: true

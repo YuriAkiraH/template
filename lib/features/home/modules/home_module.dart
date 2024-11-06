@@ -1,34 +1,25 @@
 import 'package:get_it/get_it.dart';
 import 'package:template/core/modules/feature_module.dart';
+import 'package:template/features/home/presentation/controller/home_controller.dart';
+import 'package:template/features/home/presentation/pages/home_page.dart';
 
 class HomeModule extends FeatureModule {
   @override
-  Future<void> _registerControllers(GetIt sl) async {
-    // TODO: implement _registerControllers
-    throw UnimplementedError();
+  Future<void> registerControllers(GetIt sl) async {
+    sl.registerFactory(() => HomeController());
   }
 
   @override
-  Future<void> _registerDataSources(GetIt sl) async {
-    // TODO: implement _registerDataSources
-    throw UnimplementedError();
+  Future<void> registerDataSources(GetIt sl) async {}
+
+  @override
+  Future<void> registerPages(GetIt sl) async {
+    sl.registerFactory(() => HomePage(controller: sl()));
   }
 
   @override
-  Future<void> _registerPages(GetIt sl) async {
-    // TODO: implement _registerPages
-    throw UnimplementedError();
-  }
+  Future<void> registerRepositories(GetIt sl) async {}
 
   @override
-  Future<void> _registerRepositories(GetIt sl) async {
-    // TODO: implement _registerRepositories
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> _registerUseCases(GetIt sl) async {
-    // TODO: implement _registerUseCases
-    throw UnimplementedError();
-  }
+  Future<void> registerUseCases(GetIt sl) async {}
 }
