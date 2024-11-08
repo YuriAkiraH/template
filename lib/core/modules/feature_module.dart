@@ -1,17 +1,19 @@
 import 'package:get_it/get_it.dart';
 
 abstract class FeatureModule {
-  FeatureModule(GetIt sl) {
-    registerDataSources(sl);
-    registerRepositories(sl);
-    registerUseCases(sl);
-    registerControllers(sl);
-    registerPages(sl);
+  final GetIt sl;
+
+  FeatureModule(this.sl) {
+    registerDataSources();
+    registerRepositories();
+    registerUseCases();
+    registerControllers();
+    registerPages();
   }
 
-  void registerDataSources(GetIt sl);
-  void registerRepositories(GetIt sl);
-  void registerUseCases(GetIt sl);
-  void registerControllers(GetIt sl);
-  void registerPages(GetIt sl);
+  void registerDataSources();
+  void registerRepositories();
+  void registerUseCases();
+  void registerControllers();
+  void registerPages();
 }
