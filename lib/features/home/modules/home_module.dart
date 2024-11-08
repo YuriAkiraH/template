@@ -4,22 +4,24 @@ import 'package:template/features/home/presentation/controller/home_controller.d
 import 'package:template/features/home/presentation/pages/home_page.dart';
 
 class HomeModule extends FeatureModule {
+  HomeModule(super.sl);
+
   @override
-  Future<void> registerControllers(GetIt sl) async {
+  void registerControllers(GetIt sl) {
     sl.registerFactory(() => HomeController());
   }
 
   @override
-  Future<void> registerDataSources(GetIt sl) async {}
+  void registerDataSources(GetIt sl) {}
 
   @override
-  Future<void> registerPages(GetIt sl) async {
+  void registerPages(GetIt sl) {
     sl.registerFactory(() => HomePage(controller: sl()));
   }
 
   @override
-  Future<void> registerRepositories(GetIt sl) async {}
+  void registerRepositories(GetIt sl) {}
 
   @override
-  Future<void> registerUseCases(GetIt sl) async {}
+  void registerUseCases(GetIt sl) {}
 }
