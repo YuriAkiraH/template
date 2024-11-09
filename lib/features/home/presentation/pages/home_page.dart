@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:template/features/home/presentation/controller/home_controller.dart';
+import 'package:template/features/main_app/presentation/pages/main_app.dart';
 
 class HomePage extends StatelessWidget {
   static String get route => 'Home';
@@ -21,7 +22,15 @@ class HomePage extends StatelessWidget {
         children: [
           ElevatedButton(
             onPressed: () {
-              // controller.counter++;
+              showDialog(
+                context: MainApp.mainContext!,
+                builder: (context) {
+                  return Container(
+                    color: Colors.amber,
+                    child: Text('oeuoej2q3'),
+                  );
+                },
+              );
             },
             child: Text('Test'),
           ),
