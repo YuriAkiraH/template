@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:mobx/mobx.dart';
+import 'package:template/main_app.dart';
 
 mixin ControllerExtensions {
   // final toolbox = sl<Toolbox>();
@@ -12,9 +15,9 @@ mixin ControllerExtensions {
   }) async {
     Exception? ex;
     try {
-      // if (withLoading) {
-      //   toolbox.showLoading();
-      // }
+      if (withLoading) {
+        _showLoading();
+      }
 
       await action();
     } catch (e, stackTrace) {
@@ -27,9 +30,23 @@ mixin ControllerExtensions {
       if (deferredAction != null) {
         await deferredAction(ex, ex != null);
       }
-      // if (withLoading) {
-      //   toolbox.hideLoading();
-      // }
+      if (withLoading) {
+        _hideLoading();
+      }
+    }
+  }
+
+  void _showLoading() {
+    if (MainApp.mainContext != null &&
+        !MainApp.mainContext!.loaderOverlay.visible) {
+      MainApp.mainContext?.loaderOverlay.show();
+    }
+  }
+
+  void _hideLoading() {
+    if (MainApp.mainContext != null &&
+        MainApp.mainContext!.loaderOverlay.visible) {
+      MainApp.mainContext?.loaderOverlay.hide();
     }
   }
 }

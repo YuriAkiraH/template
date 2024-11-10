@@ -35,15 +35,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           ElevatedButton(
             onPressed: () {
-              showDialog(
-                context: MainApp.mainContext!,
-                builder: (context) {
-                  return Container(
-                    color: Colors.amber,
-                    child: Text('oeuoej2q3'),
-                  );
-                },
-              );
+              widget.controller.doSomething();
             },
             child: Text('Test'),
           ),
