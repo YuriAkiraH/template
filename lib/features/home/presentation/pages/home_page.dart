@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:template/features/home/presentation/controller/home_controller.dart';
-import 'package:template/features/main_app/presentation/pages/main_app.dart';
+import 'package:template/main_app.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static String get route => 'Home';
 
   const HomePage({
@@ -11,6 +11,19 @@ class HomePage extends StatelessWidget {
   });
 
   final HomeController controller;
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      MainApp.mainContext = context;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
