@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:mobx/mobx.dart';
 import 'package:template/main_app.dart';
 
 mixin ControllerExtensions {

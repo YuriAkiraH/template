@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:template/core/network/api_client.dart';
 import 'package:template/core/network/dummyjson_api_client/api_settings/dummyjson_api_settings.dart';
-import 'package:template/core/network/dummyjson_api_client/interceptors/auth_interceptor.dart';
 
 class DummyjsonApiClient implements ApiClient<Object?> {
   late Dio _dio;
