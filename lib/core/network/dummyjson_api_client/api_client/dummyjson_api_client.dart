@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:template/core/network/api_client.dart';
 import 'package:template/core/network/dummyjson_api_client/api_settings/dummyjson_api_settings.dart';
+import 'package:template/core/network/dummyjson_api_client/interceptors/auth_interceptor.dart';
+import 'package:template/features/auth/domain/models/login_result.dart';
 
-class DummyjsonApiClient implements ApiClient<Object?> {
+class DummyjsonApiClient implements ApiClient {
   late Dio _dio;
   final DummyjsonApiSettings _apiSettings;
 
@@ -19,13 +21,12 @@ class DummyjsonApiClient implements ApiClient<Object?> {
     );
 
     _dio.interceptors.addAll([
-      // AuthInterceptor(),
+      AuthInterceptor(),
     ]);
   }
 
   @override
-  Future<Object?> get(String endPoint,
-      [Map<String, dynamic>? queryParameters]) async {
+  Future get(String endPoint, [Map<String, dynamic>? queryParameters]) async {
     return _validateResponse(
       await _dio.get(
         endPoint,
@@ -35,9 +36,9 @@ class DummyjsonApiClient implements ApiClient<Object?> {
   }
 
   @override
-  Future<Object?> post(String endPoint, Object? body) async {
+  Future post(String endPoint, Object? body) async {
     return _validateResponse(
-      await _dio.post(
+      await _dio.post<LoginResult>(
         endPoint,
         data: _createBody(body),
       ),
@@ -45,7 +46,7 @@ class DummyjsonApiClient implements ApiClient<Object?> {
   }
 
   @override
-  Future<Object?> put(String endPoint, [Object? body]) async {
+  Future put(String endPoint, [Object? body]) async {
     return _validateResponse(
       await _dio.put(
         endPoint,
@@ -55,7 +56,7 @@ class DummyjsonApiClient implements ApiClient<Object?> {
   }
 
   @override
-  Future<Object?> delete(String endPoint, [Object? body]) async {
+  Future delete(String endPoint, [Object? body]) async {
     return _validateResponse(
       await _dio.delete(
         endPoint,
@@ -79,7 +80,6 @@ class DummyjsonApiClient implements ApiClient<Object?> {
       // );
       throw Exception(); //TODO: Throw the correct exception
     } else {
-      // return jsonDecode(response.data);
       return response.data;
     }
   }

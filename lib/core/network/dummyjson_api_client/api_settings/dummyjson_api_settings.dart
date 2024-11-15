@@ -1,7 +1,7 @@
 import 'package:template/core/network/api_settings.dart';
 
 class DummyjsonApiSettings extends ApiSettings {
-  static String token = '';
+  static String? token;
 
   //TODO: Get baseUnencodedPath and authority from Environment
   DummyjsonApiSettings()

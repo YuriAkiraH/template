@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'login_result.g.dart';
 
 @JsonSerializable()
-class LoginResult extends Serializable {
+class LoginResult {
   final String id;
   final String username;
   final String email;
@@ -26,18 +26,16 @@ class LoginResult extends Serializable {
     required this.refreshToken,
   });
 
-  @override
+  // @override
   factory LoginResult.fromJson(Map<String, dynamic> json) =>
       _$LoginResultFromJson(json);
 
-  @override
+  // @override
   Map<String, dynamic> toJson() => _$LoginResultToJson(this);
 }
 
-abstract class Serializable {
-  Serializable();
+// abstract class Serializable {
+//   fromJson(Map<String, dynamic> json);
 
-  Serializable.fromJson(Map<String, dynamic> json);
-
-  Map<String, dynamic> toJson();
-}
+//   Map<String, dynamic> toJson();
+// }
