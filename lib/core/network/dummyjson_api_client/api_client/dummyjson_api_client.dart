@@ -27,51 +27,49 @@ class DummyjsonApiClient implements ApiClient {
 
   @override
   Future get(String endPoint, [Map<String, dynamic>? queryParameters]) async {
-    return _validateResponse(
-      await _dio.get(
-        endPoint,
-        queryParameters: queryParameters,
-      ),
+    final response = await _dio.get(
+      endPoint,
+      queryParameters: queryParameters,
     );
+    _validateResponse(response);
+    return response.data;
   }
 
   @override
   Future post(String endPoint, Object? body) async {
-    return _validateResponse(
-      await _dio.post<LoginResult>(
-        endPoint,
-        data: _createBody(body),
-      ),
+    final response = await _dio.post<LoginResult>(
+      endPoint,
+      data: _createBody(body),
     );
+    _validateResponse(response);
+    return response.data;
   }
 
   @override
   Future put(String endPoint, [Object? body]) async {
-    return _validateResponse(
-      await _dio.put(
-        endPoint,
-        data: _createBody(body),
-      ),
+    final response = await _dio.put(
+      endPoint,
+      data: _createBody(body),
     );
+    _validateResponse(response);
+    return response.data;
   }
 
   @override
   Future delete(String endPoint, [Object? body]) async {
-    return _validateResponse(
-      await _dio.delete(
-        endPoint,
-        data: _createBody(body),
-      ),
+    final response = await _dio.delete(
+      endPoint,
+      data: _createBody(body),
     );
+    _validateResponse(response);
+    return response.data;
   }
 
   Object? _createBody(Object? body) {
-    // final test = body != null ? jsonEncode(body) : body;
-    final test = body != null ? utf8.encode(jsonEncode(body)) : body;
-    return test;
+    return body != null ? utf8.encode(jsonEncode(body)) : body;
   }
 
-  Object? _validateResponse(Response response) {
+  void _validateResponse(Response response) {
     if (!response.statusCode.toString().startsWith('2')) {
       // throw RestException(
       //   response.statusCode ?? 0,
@@ -79,8 +77,6 @@ class DummyjsonApiClient implements ApiClient {
       //   response.data,
       // );
       throw Exception(); //TODO: Throw the correct exception
-    } else {
-      return response.data;
     }
   }
 }

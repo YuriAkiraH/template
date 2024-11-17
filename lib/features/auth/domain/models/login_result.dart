@@ -26,16 +26,8 @@ class LoginResult {
     required this.refreshToken,
   });
 
-  // @override
   factory LoginResult.fromJson(Map<String, dynamic> json) =>
       _$LoginResultFromJson(json);
 
-  // @override
   Map<String, dynamic> toJson() => _$LoginResultToJson(this);
 }
-
-// abstract class Serializable {
-//   fromJson(Map<String, dynamic> json);
-
-//   Map<String, dynamic> toJson();
-// }

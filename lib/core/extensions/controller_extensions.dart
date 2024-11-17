@@ -23,7 +23,7 @@ mixin ControllerExtensions {
       // DomainRegistry.firebaseService().recordError(e, stackTrace);
       // await toolbox.errorDialog(
       //     buildContext: buildContext!, failure: Failure());
-      ex = e as Exception;
+      // ex = e as Exception;
       rethrow;
     } finally {
       if (deferredAction != null) {

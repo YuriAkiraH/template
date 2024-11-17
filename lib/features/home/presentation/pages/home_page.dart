@@ -40,6 +40,18 @@ class _HomePageState extends State<HomePage> {
               },
               child: Text('Test'),
             ),
+            ElevatedButton(
+              onPressed: () {
+                widget.controller.getTodo();
+              },
+              child: Text('getTodo'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                widget.controller.listTodos();
+              },
+              child: Text('listTodos'),
+            ),
           ],
         ),
       ),
