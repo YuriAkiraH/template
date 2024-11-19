@@ -2,12 +2,16 @@ import 'package:template/core/modules/feature_module.dart';
 import 'package:template/features/todo/data/datasource/todo_datasource.dart';
 import 'package:template/features/todo/domain/usecases/get_todo.dart';
 import 'package:template/features/todo/domain/usecases/list_todos.dart';
+import 'package:template/features/todo/presentation/controller/todos_controller.dart';
+import 'package:template/features/todo/presentation/pages/todos_page.dart';
 
 class TodoModule extends FeatureModule {
   TodoModule(super.sl);
 
   @override
-  void registerControllers() {}
+  void registerControllers() {
+    sl.registerFactory(() => TodosController(sl()));
+  }
 
   @override
   void registerDataSources() {
@@ -15,7 +19,9 @@ class TodoModule extends FeatureModule {
   }
 
   @override
-  void registerPages() {}
+  void registerPages() {
+    sl.registerFactory(() => TodosPage(controller: sl()));
+  }
 
   @override
   void registerRepositories() {}

@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       MainApp.mainContext = context;
+      widget.controller.buildContext = context;
     });
   }
 
@@ -51,6 +52,12 @@ class _HomePageState extends State<HomePage> {
                 widget.controller.listTodos();
               },
               child: Text('listTodos'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                widget.controller.navigateToTodos();
+              },
+              child: Text('navigate to todos'),
             ),
           ],
         ),

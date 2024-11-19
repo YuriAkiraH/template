@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:template/core/extensions/controller_extensions.dart';
 import 'package:template/core/modules/injection_container.dart';
@@ -5,16 +6,27 @@ import 'package:template/features/auth/domain/models/credentials.dart';
 import 'package:template/features/auth/domain/usecases/login.dart';
 import 'package:template/features/todo/domain/usecases/get_todo.dart';
 import 'package:template/features/todo/domain/usecases/list_todos.dart';
+import 'package:template/features/todo/presentation/pages/todos_page.dart';
+part 'home_controller.g.dart';
 
-class HomeController with ControllerExtensions {
+class HomeController = _HomeControllerBase with _$HomeController;
+
+abstract class _HomeControllerBase with Store, ControllerExtensions {
   @readonly
-  bool didInit = false;
+  bool _didInit = false;
 
   @action
   Future<void> init() async {
-    trySafeAction(() async {
-      await _getFarmInfo();
-    });
+    trySafeAction(
+      () async {
+        _didInit = false;
+        await _getFarmInfo();
+      },
+      withLoading: false,
+      deferredAction: (ex, didRethrow) {
+        _didInit = true;
+      },
+    );
   }
 
   Future<void> _getFarmInfo() async {
@@ -44,5 +56,9 @@ class HomeController with ControllerExtensions {
     final result = await listTodos();
     print('');
     // });
+  }
+
+  void navigateToTodos() {
+    Navigator.pushNamed(buildContext!, TodosPage.route);
   }
 }

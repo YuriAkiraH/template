@@ -6,7 +6,7 @@ import 'package:template/main_app.dart';
 
 mixin ControllerExtensions {
   // final toolbox = sl<Toolbox>();
-  BuildContext? context;
+  BuildContext? buildContext;
   FutureOr<void> trySafeAction(
     FutureOr<void> Function() action, {
     FutureOr<void> Function(Exception? ex, bool didRethrow)? deferredAction,

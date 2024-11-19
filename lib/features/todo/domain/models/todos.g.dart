@@ -8,7 +8,7 @@ part of 'todos.dart';
 
 Todos _$TodosFromJson(Map<String, dynamic> json) => Todos(
       todos: (json['todos'] as List<dynamic>)
-          .map((e) => Todos.fromJson(e as Map<String, dynamic>)),
+          .map((e) => Todo.fromJson(e as Map<String, dynamic>)),
     )
       ..total = (json['total'] as num?)?.toInt()
       ..limit = (json['limit'] as num?)?.toInt()
