@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:template/core/extensions/controller_extensions.dart';
@@ -43,11 +45,11 @@ abstract class _HomeControllerBase with Store, ControllerExtensions {
   }
 
   Future<void> getTodo() async {
-    // await trySafeAction(() async {
-    final getTodo = sl<GetTodo>();
-    final result = await getTodo(1);
-    print('');
-    // });
+    throw SocketException('my custom error');
+
+    // final getTodo = sl<GetTodo>();
+    // final result = await getTodo(99999);
+    // print('');
   }
 
   Future<void> listTodos() async {

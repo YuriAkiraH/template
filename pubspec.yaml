@@ -18,6 +18,7 @@ dependencies:
   dio: ^5.7.0
   dio_smart_retry: ^6.0.0
   async: ^2.11.0
+  collection: ^1.18.0
 
 dev_dependencies:
   flutter_test:
