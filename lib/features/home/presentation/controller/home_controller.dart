@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:template/core/extensions/controller_extensions.dart';
@@ -45,7 +47,7 @@ abstract class _HomeControllerBase with Store, ControllerExtensions {
   }
 
   Future<void> getTodo() async {
-    throw SocketException('my custom error');
+    throw TimeoutException('test abc');
 
     // final getTodo = sl<GetTodo>();
     // final result = await getTodo(99999);
