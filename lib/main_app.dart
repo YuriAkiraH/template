@@ -7,7 +7,9 @@ import 'package:template/features/home/presentation/pages/home_page.dart';
 
 class MainApp extends StatelessWidget {
   static BuildContext get context => MainApp.navigatorKey.currentState!.context;
+  static final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   static final navigatorKey = GlobalKey<NavigatorState>();
+
   const MainApp({super.key});
 
   @override
@@ -15,7 +17,7 @@ class MainApp extends StatelessWidget {
     return GlobalLoaderOverlay(
       // overlayColor: AppColor.whiteText.withOpacity(0.5),
       overlayWidgetBuilder: (_) {
-        return Center(
+        return const Center(
           child: SizedBox(
             height: 42,
             width: 42,
@@ -26,6 +28,7 @@ class MainApp extends StatelessWidget {
         );
       },
       child: MaterialApp(
+        scaffoldMessengerKey: scaffoldKey,
         navigatorKey: navigatorKey,
         onGenerateRoute: (settings) {
           return Routes.getPagesRoutes(settings)[settings.name];
