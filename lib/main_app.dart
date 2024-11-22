@@ -6,7 +6,8 @@ import 'package:template/core/themes/app_theme.dart';
 import 'package:template/features/home/presentation/pages/home_page.dart';
 
 class MainApp extends StatelessWidget {
-  static BuildContext? mainContext;
+  static BuildContext get context => MainApp.navigatorKey.currentState!.context;
+  static final navigatorKey = GlobalKey<NavigatorState>();
   const MainApp({super.key});
 
   @override
@@ -25,10 +26,12 @@ class MainApp extends StatelessWidget {
         );
       },
       child: MaterialApp(
+        navigatorKey: navigatorKey,
         onGenerateRoute: (settings) {
           return Routes.getPagesRoutes(settings)[settings.name];
         },
         theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
         initialRoute: HomePage.route,
         home: sl<HomePage>(),
         routes: {

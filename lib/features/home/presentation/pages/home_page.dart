@@ -21,7 +21,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      MainApp.mainContext = context;
       widget.controller.buildContext = context;
     });
   }

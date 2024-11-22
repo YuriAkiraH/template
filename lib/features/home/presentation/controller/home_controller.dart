@@ -47,7 +47,7 @@ abstract class _HomeControllerBase with Store, ControllerExtensions {
   }
 
   Future<void> getTodo() async {
-    throw TimeoutException('test abc');
+    throw SocketException('test abc');
 
     // final getTodo = sl<GetTodo>();
     // final result = await getTodo(99999);
@@ -55,11 +55,12 @@ abstract class _HomeControllerBase with Store, ControllerExtensions {
   }
 
   Future<void> listTodos() async {
-    // await trySafeAction(() async {
-    final listTodos = sl<ListTodos>();
-    final result = await listTodos();
-    print('');
-    // });
+    await trySafeAction(() async {
+      await Future.delayed(const Duration(seconds: 2));
+      // final listTodos = sl<ListTodos>();
+      // final result = await listTodos();
+      // print('');
+    });
   }
 
   void navigateToTodos() {

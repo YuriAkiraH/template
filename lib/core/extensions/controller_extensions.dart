@@ -36,16 +36,14 @@ mixin ControllerExtensions {
   }
 
   void _showLoading() {
-    if (MainApp.mainContext != null &&
-        !MainApp.mainContext!.loaderOverlay.visible) {
-      MainApp.mainContext?.loaderOverlay.show();
+    if (!MainApp.context.loaderOverlay.visible) {
+      MainApp.context.loaderOverlay.show();
     }
   }
 
   void _hideLoading() {
-    if (MainApp.mainContext != null &&
-        MainApp.mainContext!.loaderOverlay.visible) {
-      MainApp.mainContext?.loaderOverlay.hide();
+    if (MainApp.context.loaderOverlay.visible) {
+      MainApp.context.loaderOverlay.hide();
     }
   }
 }
