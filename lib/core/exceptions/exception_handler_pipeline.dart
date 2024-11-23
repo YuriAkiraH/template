@@ -6,8 +6,12 @@ import 'package:template/core/exceptions/exception_handler.dart';
 
 class ExceptionHandlerPipeline {
   final List<ExceptionHandler> handlers;
+  final ExceptionHandler unexpectedHandler;
 
-  ExceptionHandlerPipeline(this.handlers) {
+  ExceptionHandlerPipeline({
+    required this.handlers,
+    required this.unexpectedHandler,
+  }) {
     FlutterError.onError = (FlutterErrorDetails details) {
       if (details.exception is Exception) {
         matchHandler(details.exception as Exception);
@@ -27,6 +31,10 @@ class ExceptionHandlerPipeline {
 
   void matchHandler(Exception ex) {
     final handler = handlers.firstWhereOrNull((e) => e.isOfType(ex));
-    handler?.handle(ex);
+    if (handler != null) {
+      handler.handle(ex);
+    } else {
+      unexpectedHandler.handle(ex);
+    }
   }
 }

@@ -47,7 +47,8 @@ abstract class _HomeControllerBase with Store, ControllerExtensions {
   }
 
   Future<void> getTodo() async {
-    throw SocketException('test abc');
+    // throw SocketException('test abc');
+    throw Exception('test abc');
 
     // final getTodo = sl<GetTodo>();
     // final result = await getTodo(99999);
