@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:template/core/extensions/controller_extensions.dart';
+import 'package:template/core/extensions/mixins/controller_extensions.dart';
 import 'package:template/core/modules/injection_container.dart';
 import 'package:template/features/auth/domain/models/credentials.dart';
 import 'package:template/features/auth/domain/usecases/login.dart';
@@ -48,11 +48,11 @@ abstract class _HomeControllerBase with Store, ControllerExtensions {
 
   Future<void> getTodo() async {
     // throw SocketException('test abc');
-    throw Exception('test abc');
+    // throw Exception('test abc');
 
-    // final getTodo = sl<GetTodo>();
-    // final result = await getTodo(99999);
-    // print('');
+    final getTodo = sl<GetTodo>();
+    final result = await getTodo(1);
+    print('');
   }
 
   Future<void> listTodos() async {

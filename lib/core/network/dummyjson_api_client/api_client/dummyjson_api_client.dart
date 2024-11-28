@@ -1,10 +1,13 @@
 import 'dart:convert';
 
+import 'package:async/async.dart';
 import 'package:dio/dio.dart';
 import 'package:template/core/network/api_client.dart';
+import 'package:template/core/network/dummyjson_api_client/api_errors/dummyjson_api_errors.dart';
 import 'package:template/core/network/dummyjson_api_client/api_settings/dummyjson_api_settings.dart';
 import 'package:template/core/network/dummyjson_api_client/interceptors/auth_interceptor.dart';
 import 'package:template/features/auth/domain/models/login_result.dart';
+import 'package:template/features/todo/domain/models/todo.dart';
 
 class DummyjsonApiClient implements ApiClient {
   late Dio _dio;
@@ -17,12 +20,34 @@ class DummyjsonApiClient implements ApiClient {
       BaseOptions(
         baseUrl: _apiSettings.baseUrl,
         headers: _apiSettings.headers,
+        validateStatus: (status) => true,
       ),
     );
 
     _dio.interceptors.addAll([
       AuthInterceptor(),
     ]);
+  }
+
+  Future<Result<T?>> getTest<T>(
+    String endPoint,
+    JsonFactory<T>? jsonFactory, [
+    Map<String, dynamic>? queryParameters,
+  ]) async {
+    validate(
+      () => _dio.get(
+        endPoint,
+        queryParameters: queryParameters,
+      ),
+    );
+    final response = await _dio.get(
+      endPoint,
+      queryParameters: queryParameters,
+    );
+    _validateResponse(response);
+    return Result.value(
+      jsonFactory != null ? jsonFactory(response.data) : null,
+    );
   }
 
   @override
@@ -78,5 +103,17 @@ class DummyjsonApiClient implements ApiClient {
       // );
       throw Exception(); //TODO: Throw the correct exception
     }
+  }
+
+  Exception validate(Future<Response> Function() func) {
+    return CommonErrors.errors['not_found']!;
+    // final response = await func();
+    // if (response.statusCode == null) {
+    //   throw Exception('STATUS_CODE_NOT_FOUND');
+    // } else {
+    //   if (response.statusCode == 404) {
+    //     throw Exception('NOT_FOUND');
+    //   }
+    // }
   }
 }

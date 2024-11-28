@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:template/core/extensions/controller_extensions.dart';
+import 'package:template/core/extensions/mixins/controller_extensions.dart';
 import 'package:template/features/todo/domain/usecases/list_todos.dart';
 import 'package:template/features/todo/presentation/view_model/todos_view_model.dart';
 part 'todos_controller.g.dart';

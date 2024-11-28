@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:template/features/home/presentation/controller/home_controller.dart';
 import 'package:template/main_app.dart';
 
@@ -16,10 +18,14 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _rotationAnimationController;
+
   @override
   void initState() {
     super.initState();
+    _rotationAnimationController = AnimationController(vsync: this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       widget.controller.buildContext = context;
     });
