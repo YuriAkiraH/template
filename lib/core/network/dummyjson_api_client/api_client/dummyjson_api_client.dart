@@ -7,6 +7,7 @@ import 'package:template/core/network/api_client.dart';
 import 'package:template/core/network/dummyjson_api_client/api_errors/dummyjson_api_errors.dart';
 import 'package:template/core/network/dummyjson_api_client/api_settings/dummyjson_api_settings.dart';
 import 'package:template/core/network/dummyjson_api_client/interceptors/auth_interceptor.dart';
+import 'package:template/core/network/dummyjson_api_client/models/dummyjson_error.dart';
 
 class DummyjsonApiClient implements ApiClient {
   late Dio _dio;
@@ -115,6 +116,9 @@ class DummyjsonApiClient implements ApiClient {
       if (response.statusCode == 404) {
         return CommonErrors.NOT_FOUND;
       }
+      // else if (response.statusCode == 400) {
+      //   return DummyjsonError.fromJson(response.data);
+      // }
     }
 
     return null;
