@@ -40,6 +40,18 @@ class _HomePageState extends State<HomePage>
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
+            ListTile(
+              title: Text('Socket exception'),
+              onTap: () {
+                widget.controller.throwSocketException();
+              },
+            ),
+            ListTile(
+              title: Text('Unexpected exception'),
+              onTap: () {
+                widget.controller.throwUnexpectedException();
+              },
+            ),
             ElevatedButton(
               onPressed: () {
                 widget.controller.doSomething();
