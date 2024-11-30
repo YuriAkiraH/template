@@ -20,5 +20,3 @@ class Todo {
 
   Map<String, dynamic> toJson() => _$TodoToJson(this);
 }
-
-typedef JsonFactory<T> = T Function(Map<String, dynamic> json);

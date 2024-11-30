@@ -11,7 +11,9 @@ class Login {
 
   Future<Result<LoginResult>> call(Credentials credentials) async {
     var result = await _authDatasource.login(credentials);
-    DummyjsonApiSettings.token = result.accessToken;
-    return Result.value(result);
+    if (result.isValue) {
+      DummyjsonApiSettings.token = result.asValue!.value.accessToken;
+    }
+    return result;
   }
 }

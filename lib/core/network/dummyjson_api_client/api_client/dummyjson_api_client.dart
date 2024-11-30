@@ -2,12 +2,11 @@ import 'dart:convert';
 
 import 'package:async/async.dart';
 import 'package:dio/dio.dart';
+import 'package:template/core/extensions/typedef/json_factory.dart';
 import 'package:template/core/network/api_client.dart';
 import 'package:template/core/network/dummyjson_api_client/api_errors/dummyjson_api_errors.dart';
 import 'package:template/core/network/dummyjson_api_client/api_settings/dummyjson_api_settings.dart';
 import 'package:template/core/network/dummyjson_api_client/interceptors/auth_interceptor.dart';
-import 'package:template/features/auth/domain/models/login_result.dart';
-import 'package:template/features/todo/domain/models/todo.dart';
 
 class DummyjsonApiClient implements ApiClient {
   late Dio _dio;
@@ -29,80 +28,87 @@ class DummyjsonApiClient implements ApiClient {
     ]);
   }
 
-  Future<Result<T>> getTest<T>(
+  @override
+  Future<Result<T>> get<T>(
     String endPoint,
-    JsonFactory<T> jsonFactory, [
+    JsonFactory<T> jsonResultFactory, [
     Map<String, dynamic>? queryParameters,
   ]) async {
     final response = await _dio.get(
       endPoint,
       queryParameters: queryParameters,
     );
-    final error = _validate(response);
+    final error = _validateResponse(response);
 
     if (error != null) {
       return Result.error(error);
     }
 
-    return Result.value(jsonFactory(response.data));
+    return Result.value(jsonResultFactory(response.data));
   }
 
   @override
-  Future get(String endPoint, [Map<String, dynamic>? queryParameters]) async {
-    final response = await _dio.get(
-      endPoint,
-      queryParameters: queryParameters,
-    );
-    _validateResponse(response);
-    return response.data;
-  }
-
-  @override
-  Future post(String endPoint, Object? body) async {
-    final response = await _dio.post<LoginResult>(
+  Future<Result<T>> post<T>(
+    String endPoint,
+    JsonFactory<T> jsonResultFactory,
+    Object? body,
+  ) async {
+    final response = await _dio.post(
       endPoint,
       data: _createBody(body),
     );
-    _validateResponse(response);
-    return response.data;
+    final error = _validateResponse(response);
+
+    if (error != null) {
+      return Result.error(error);
+    }
+
+    return Result.value(jsonResultFactory(response.data));
   }
 
   @override
-  Future put(String endPoint, [Object? body]) async {
+  Future<Result<T>> put<T>(
+    String endPoint,
+    JsonFactory<T> jsonResultFactory, [
+    Object? body,
+  ]) async {
     final response = await _dio.put(
       endPoint,
       data: _createBody(body),
     );
-    _validateResponse(response);
-    return response.data;
+    final error = _validateResponse(response);
+
+    if (error != null) {
+      return Result.error(error);
+    }
+
+    return Result.value(jsonResultFactory(response.data));
   }
 
   @override
-  Future delete(String endPoint, [Object? body]) async {
+  Future<Result<T>> delete<T>(
+    String endPoint,
+    JsonFactory<T> jsonResultFactory, [
+    Object? body,
+  ]) async {
     final response = await _dio.delete(
       endPoint,
       data: _createBody(body),
     );
-    _validateResponse(response);
-    return response.data;
+    final error = _validateResponse(response);
+
+    if (error != null) {
+      return Result.error(error);
+    }
+
+    return Result.value(jsonResultFactory(response.data));
   }
 
   Object? _createBody(Object? body) {
     return body != null ? utf8.encode(jsonEncode(body)) : body;
   }
 
-  void _validateResponse(Response response) {
-    if (!response.statusCode.toString().startsWith('2')) {
-      // throw RestException(
-      //   response.statusCode ?? 0,
-      //   response.statusMessage,
-      //   response.data,
-      // );
-      throw Exception(); //TODO: Throw the correct exception
-    }
-  }
-
-  ExpectedError? _validate(Response response) {
+  ExpectedError? _validateResponse(Response response) {
     if (response.statusCode == null) {
       throw Exception('STATUS_CODE_NOT_FOUND');
     } else {

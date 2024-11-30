@@ -10,15 +10,17 @@ class TodoDatasource {
   TodoDatasource(this._dummyjsonApi);
 
   Future<Result<Todo>> getTodo(int todoId) async {
-    return await _dummyjsonApi.getTest<Todo>(
+    return await _dummyjsonApi.get<Todo>(
       '/todos/$todoId',
       Todo.fromJson,
     );
   }
 
-  Future<Todos> listTodos(PageableListRequest pageableListRequest) async {
-    final result = await _dummyjsonApi.get(
-        '/todos?limit=${pageableListRequest.limit}&skip=${pageableListRequest.skip}');
-    return Todos.fromJson(result);
+  Future<Result<Todos>> listTodos(
+      PageableListRequest pageableListRequest) async {
+    return await _dummyjsonApi.get<Todos>(
+      '/todos?limit=${pageableListRequest.limit}&skip=${pageableListRequest.skip}',
+      Todos.fromJson,
+    );
   }
 }

@@ -13,21 +13,25 @@ class ListTodos {
     PageableListRequest pageableListRequest = const PageableListRequest(),
   ]) async {
     final result = await todoDatasource.listTodos(pageableListRequest);
-    List<TodoViewModel> todoViewModels = [];
-    todoViewModels.addAll(
-      result.todos
-          .map(
-            (e) => TodoViewModel(
-              id: e.id,
-              todo: e.todo,
-              completed: e.completed,
-              userId: e.userId,
-            ),
-          )
-          .toList(),
-    );
-    return Result.value(
-      TodosViewModel(todos: todoViewModels),
-    );
+    if (result.isValue) {
+      List<TodoViewModel> todoViewModels = [];
+      todoViewModels.addAll(
+        result.asValue!.value.todos
+            .map(
+              (e) => TodoViewModel(
+                id: e.id,
+                todo: e.todo,
+                completed: e.completed,
+                userId: e.userId,
+              ),
+            )
+            .toList(),
+      );
+      return Result.value(
+        TodosViewModel(todos: todoViewModels),
+      );
+    } else {
+      return Result.error(result.asError!.error);
+    }
   }
 }
