@@ -2,11 +2,11 @@
 
 class ExpectedError {
   final String code;
-  final Exception ex;
+  final String message;
 
-  ExpectedError(this.code, this.ex);
+  const ExpectedError(this.code, this.message);
 }
 
 class CommonErrors {
-  static get NOT_FOUND => ExpectedError('NOT_FOUND', Exception());
+  static get NOT_FOUND => const ExpectedError('NOT_FOUND', 'Not found');
 }

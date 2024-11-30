@@ -115,10 +115,10 @@ class DummyjsonApiClient implements ApiClient {
     } else {
       if (response.statusCode == 404) {
         return CommonErrors.NOT_FOUND;
+      } else if (response.statusCode == 400) {
+        final error = DummyjsonError.fromJson(response.data);
+        return ExpectedError(error.message, error.message);
       }
-      // else if (response.statusCode == 400) {
-      //   return DummyjsonError.fromJson(response.data);
-      // }
     }
 
     return null;
