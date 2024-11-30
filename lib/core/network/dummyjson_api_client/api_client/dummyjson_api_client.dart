@@ -29,25 +29,22 @@ class DummyjsonApiClient implements ApiClient {
     ]);
   }
 
-  Future<Result<T?>> getTest<T>(
+  Future<Result<T>> getTest<T>(
     String endPoint,
-    JsonFactory<T>? jsonFactory, [
+    JsonFactory<T> jsonFactory, [
     Map<String, dynamic>? queryParameters,
   ]) async {
-    validate(
-      () => _dio.get(
-        endPoint,
-        queryParameters: queryParameters,
-      ),
-    );
     final response = await _dio.get(
       endPoint,
       queryParameters: queryParameters,
     );
-    _validateResponse(response);
-    return Result.value(
-      jsonFactory != null ? jsonFactory(response.data) : null,
-    );
+    final error = _validate(response);
+
+    if (error != null) {
+      return Result.error(error);
+    }
+
+    return Result.value(jsonFactory(response.data));
   }
 
   @override
@@ -105,15 +102,15 @@ class DummyjsonApiClient implements ApiClient {
     }
   }
 
-  Exception validate(Future<Response> Function() func) {
-    return CommonErrors.errors['not_found']!;
-    // final response = await func();
-    // if (response.statusCode == null) {
-    //   throw Exception('STATUS_CODE_NOT_FOUND');
-    // } else {
-    //   if (response.statusCode == 404) {
-    //     throw Exception('NOT_FOUND');
-    //   }
-    // }
+  ExpectedError? _validate(Response response) {
+    if (response.statusCode == null) {
+      throw Exception('STATUS_CODE_NOT_FOUND');
+    } else {
+      if (response.statusCode == 404) {
+        return CommonErrors.NOT_FOUND;
+      }
+    }
+
+    return null;
   }
 }

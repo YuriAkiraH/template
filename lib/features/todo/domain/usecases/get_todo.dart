@@ -8,10 +8,6 @@ class GetTodo {
   GetTodo(this.todoDatasource);
 
   Future<Result<Todo>> call(int todoId) async {
-    throw Exception();
-    // try {
-
-    // } on
-    // return await todoDatasource.getTodo(todoId);
+    return await todoDatasource.getTodo(todoId);
   }
 }
