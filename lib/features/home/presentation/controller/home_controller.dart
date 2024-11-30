@@ -7,9 +7,9 @@ import 'package:template/core/extensions/mixins/controller_extensions.dart';
 import 'package:template/features/todo/presentation/pages/todos_page.dart';
 part 'home_controller.g.dart';
 
-class HomeController = _HomeControllerBase with _$HomeController;
+class HomeController = HomeControllerBase with _$HomeController;
 
-abstract class _HomeControllerBase with Store, ControllerExtensions {
+abstract class HomeControllerBase with Store, ControllerExtensions {
   @readonly
   bool _didInit = false;
 
@@ -28,11 +28,11 @@ abstract class _HomeControllerBase with Store, ControllerExtensions {
   }
 
   Future<void> _getFarmInfo() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
   }
 
   void throwSocketException() {
-    throw SocketException('test abc');
+    throw const SocketException('test abc');
   }
 
   void throwUnexpectedException() {

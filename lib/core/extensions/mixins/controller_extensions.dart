@@ -5,7 +5,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:template/main_app.dart';
 
 mixin ControllerExtensions {
-  // final toolbox = sl<Toolbox>();
   BuildContext? buildContext;
   FutureOr<void> trySafeAction(
     FutureOr<void> Function() action, {
@@ -19,11 +18,8 @@ mixin ControllerExtensions {
       }
 
       await action();
-    } catch (e, stackTrace) {
-      // DomainRegistry.firebaseService().recordError(e, stackTrace);
-      // await toolbox.errorDialog(
-      //     buildContext: buildContext!, failure: Failure());
-      // ex = e as Exception;
+    } catch (e, _) {
+      ex = e as Exception;
       rethrow;
     } finally {
       if (deferredAction != null) {

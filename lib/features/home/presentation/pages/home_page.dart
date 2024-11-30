@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:template/features/home/presentation/controller/home_controller.dart';
-import 'package:template/main_app.dart';
 
 class HomePage extends StatefulWidget {
   static String get route => 'Home';
@@ -18,14 +15,10 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _rotationAnimationController;
-
+class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _rotationAnimationController = AnimationController(vsync: this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       widget.controller.buildContext = context;
     });
@@ -41,8 +34,8 @@ class _HomePageState extends State<HomePage>
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              title: Text('Socket exception'),
-              leading: Icon(
+              title: const Text('Socket exception'),
+              leading: const Icon(
                 Icons.signal_wifi_connected_no_internet_4_rounded,
               ),
               onTap: () {
@@ -50,8 +43,8 @@ class _HomePageState extends State<HomePage>
               },
             ),
             ListTile(
-              title: Text('Unexpected exception'),
-              leading: Icon(
+              title: const Text('Unexpected exception'),
+              leading: const Icon(
                 Icons.warning_rounded,
               ),
               onTap: () {
@@ -59,8 +52,8 @@ class _HomePageState extends State<HomePage>
               },
             ),
             ListTile(
-              title: Text('Show loading'),
-              leading: Icon(
+              title: const Text('Show loading'),
+              leading: const Icon(
                 Icons.timelapse_rounded,
               ),
               onTap: () {
@@ -68,8 +61,8 @@ class _HomePageState extends State<HomePage>
               },
             ),
             ListTile(
-              title: Text('Todos'),
-              trailing: Icon(Icons.arrow_forward_outlined),
+              title: const Text('Todos'),
+              trailing: const Icon(Icons.arrow_forward_outlined),
               onTap: () {
                 widget.controller.navigateToTodos();
               },
