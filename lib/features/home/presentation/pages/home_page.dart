@@ -42,39 +42,37 @@ class _HomePageState extends State<HomePage>
           children: [
             ListTile(
               title: Text('Socket exception'),
+              leading: Icon(
+                Icons.signal_wifi_connected_no_internet_4_rounded,
+              ),
               onTap: () {
                 widget.controller.throwSocketException();
               },
             ),
             ListTile(
               title: Text('Unexpected exception'),
+              leading: Icon(
+                Icons.warning_rounded,
+              ),
               onTap: () {
                 widget.controller.throwUnexpectedException();
               },
             ),
-            ElevatedButton(
-              onPressed: () {
-                widget.controller.doSomething();
+            ListTile(
+              title: Text('Show loading'),
+              leading: Icon(
+                Icons.timelapse_rounded,
+              ),
+              onTap: () {
+                widget.controller.showLoading();
               },
-              child: Text('Test'),
             ),
-            ElevatedButton(
-              onPressed: () {
-                widget.controller.getTodo();
-              },
-              child: Text('getTodo'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                widget.controller.listTodos();
-              },
-              child: Text('listTodos'),
-            ),
-            ElevatedButton(
-              onPressed: () {
+            ListTile(
+              title: Text('Todos'),
+              trailing: Icon(Icons.arrow_forward_outlined),
+              onTap: () {
                 widget.controller.navigateToTodos();
               },
-              child: Text('navigate to todos'),
             ),
           ],
         ),

@@ -1,15 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:template/core/extensions/mixins/controller_extensions.dart';
-import 'package:template/core/modules/injection_container.dart';
-import 'package:template/features/auth/domain/models/credentials.dart';
-import 'package:template/features/auth/domain/usecases/login.dart';
-import 'package:template/features/todo/domain/usecases/get_todo.dart';
-import 'package:template/features/todo/domain/usecases/list_todos.dart';
 import 'package:template/features/todo/presentation/pages/todos_page.dart';
 part 'home_controller.g.dart';
 
@@ -37,21 +31,6 @@ abstract class _HomeControllerBase with Store, ControllerExtensions {
     await Future.delayed(Duration(seconds: 2));
   }
 
-  Future<void> doSomething() async {
-    await trySafeAction(() async {
-      final login = sl<Login>();
-      login(
-        Credentials(username: 'emilys', password: 'emilyspass'),
-      );
-    });
-  }
-
-  Future<void> getTodo() async {
-    final getTodo = sl<GetTodo>();
-    final result = await getTodo(1);
-    print('');
-  }
-
   void throwSocketException() {
     throw SocketException('test abc');
   }
@@ -60,12 +39,9 @@ abstract class _HomeControllerBase with Store, ControllerExtensions {
     throw Exception('test abc');
   }
 
-  Future<void> listTodos() async {
+  Future<void> showLoading() async {
     await trySafeAction(() async {
       await Future.delayed(const Duration(seconds: 2));
-      // final listTodos = sl<ListTodos>();
-      // final result = await listTodos();
-      // print('');
     });
   }
 
