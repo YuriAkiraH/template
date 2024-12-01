@@ -7,6 +7,7 @@ import 'package:template/core/modules/injection_container.dart';
 import 'package:template/features/auth/domain/errors/login_errors.dart';
 import 'package:template/features/auth/domain/models/credentials.dart';
 import 'package:template/features/auth/domain/usecases/login.dart';
+import 'package:template/features/auth/presentation/pages/login_page.dart';
 import 'package:template/features/todo/presentation/pages/todos_page.dart';
 part 'home_controller.g.dart';
 
@@ -59,5 +60,9 @@ abstract class HomeControllerBase with Store, ControllerExtensions {
 
   void navigateToTodos() {
     Navigator.pushNamed(buildContext!, TodosPage.route);
+  }
+
+  void navigateToLogin() {
+    Navigator.pushNamed(buildContext!, LoginPage.route);
   }
 }

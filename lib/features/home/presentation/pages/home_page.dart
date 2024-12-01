@@ -67,6 +67,13 @@ class _HomePageState extends State<HomePage> {
                 widget.controller.navigateToTodos();
               },
             ),
+            ListTile(
+              title: const Text('Login'),
+              trailing: const Icon(Icons.arrow_forward_outlined),
+              onTap: () {
+                widget.controller.navigateToLogin();
+              },
+            ),
           ],
         ),
       ),
