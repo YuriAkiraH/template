@@ -8,9 +8,9 @@ part of 'todos_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$TodosController on _TodosControllerBase, Store {
+mixin _$TodosController on TodosControllerBase, Store {
   late final _$_didInitAtom =
-      Atom(name: '_TodosControllerBase._didInit', context: context);
+      Atom(name: 'TodosControllerBase._didInit', context: context);
 
   bool get didInit {
     _$_didInitAtom.reportRead();
@@ -28,7 +28,7 @@ mixin _$TodosController on _TodosControllerBase, Store {
   }
 
   late final _$_todosAtom =
-      Atom(name: '_TodosControllerBase._todos', context: context);
+      Atom(name: 'TodosControllerBase._todos', context: context);
 
   TodosViewModel? get todos {
     _$_todosAtom.reportRead();
@@ -46,7 +46,7 @@ mixin _$TodosController on _TodosControllerBase, Store {
   }
 
   late final _$initAsyncAction =
-      AsyncAction('_TodosControllerBase.init', context: context);
+      AsyncAction('TodosControllerBase.init', context: context);
 
   @override
   Future<void> init() {

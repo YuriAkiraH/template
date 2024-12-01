@@ -1,9 +1,12 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:template/core/extensions/mixins/controller_extensions.dart';
+import 'package:template/core/modules/injection_container.dart';
+import 'package:template/features/auth/domain/errors/login_errors.dart';
+import 'package:template/features/auth/domain/models/credentials.dart';
+import 'package:template/features/auth/domain/usecases/login.dart';
 import 'package:template/features/todo/presentation/pages/todos_page.dart';
 part 'home_controller.g.dart';
 
@@ -32,7 +35,16 @@ abstract class HomeControllerBase with Store, ControllerExtensions {
   }
 
   void throwSocketException() {
-    throw const SocketException('test abc');
+    final loginUseCase = sl<Login>();
+    loginUseCase(
+      Credentials(username: 'a', password: 'b'),
+    ).then((result) {
+      if (result.asError?.error == LoginErrors.INVALID_CREDENTIALS.error) {
+        print('INVALID_CREDENTIALS');
+      }
+    });
+
+    // throw const SocketException('test abc');
   }
 
   void throwUnexpectedException() {

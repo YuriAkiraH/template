@@ -1,17 +1,17 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:template/core/network/dummyjson_api_client/api_errors/dummyjson_api_errors.dart';
+import 'package:template/core/network/dummyjson_api_client/api_errors/dummyjson_api_expected_error.dart';
 
 enum LoginErrors {
   USER_NAME_AND_PASSWORD_REQUIRED(
     ExpectedError(
-      'USER_NAME_AND_PASSWORD_REQUIRED',
-      'Username and password is requried.',
+      'Username and password required',
+      'Username and password required.',
     ),
   ),
   INVALID_CREDENTIALS(
     ExpectedError(
-      'INVALID_CREDENTIALS',
+      'Invalid credentials',
       'Invalid credentials.',
     ),
   );

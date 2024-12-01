@@ -5,12 +5,12 @@ import 'package:template/features/todo/domain/usecases/list_todos.dart';
 import 'package:template/features/todo/presentation/view_model/todos_view_model.dart';
 part 'todos_controller.g.dart';
 
-class TodosController = _TodosControllerBase with _$TodosController;
+class TodosController = TodosControllerBase with _$TodosController;
 
-abstract class _TodosControllerBase with Store, ControllerExtensions {
+abstract class TodosControllerBase with Store, ControllerExtensions {
   final ListTodos _listTodosUC;
 
-  _TodosControllerBase(this._listTodosUC);
+  TodosControllerBase(this._listTodosUC);
 
   @readonly
   bool _didInit = false;

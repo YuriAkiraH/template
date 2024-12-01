@@ -4,7 +4,8 @@ import 'package:async/async.dart';
 import 'package:dio/dio.dart';
 import 'package:template/core/extensions/typedef/json_factory.dart';
 import 'package:template/core/network/api_client.dart';
-import 'package:template/core/network/dummyjson_api_client/api_errors/dummyjson_api_errors.dart';
+import 'package:template/core/network/dummyjson_api_client/api_errors/dummyjson_api_common_errors.dart';
+import 'package:template/core/network/dummyjson_api_client/api_errors/dummyjson_api_expected_error.dart';
 import 'package:template/core/network/dummyjson_api_client/api_settings/dummyjson_api_settings.dart';
 import 'package:template/core/network/dummyjson_api_client/interceptors/auth_interceptor.dart';
 import 'package:template/core/network/dummyjson_api_client/models/dummyjson_error.dart';
@@ -114,9 +115,10 @@ class DummyjsonApiClient implements ApiClient {
       throw Exception('STATUS_CODE_NOT_FOUND');
     } else {
       if (response.statusCode == 404) {
-        return CommonErrors.NOT_FOUND;
+        return CommonErrors.NOT_FOUND.error;
       } else if (response.statusCode == 400) {
         final error = DummyjsonError.fromJson(response.data);
+        //Using message as error code because Dummyjson doesn't have one
         return ExpectedError(error.message, error.message);
       }
     }
