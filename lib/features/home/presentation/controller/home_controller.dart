@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
@@ -36,16 +37,16 @@ abstract class HomeControllerBase with Store, ControllerExtensions {
   }
 
   void throwSocketException() {
-    final loginUseCase = sl<Login>();
-    loginUseCase(
-      Credentials(username: 'a', password: 'b'),
-    ).then((result) {
-      if (result.asError?.error == LoginErrors.INVALID_CREDENTIALS.error) {
-        print('INVALID_CREDENTIALS');
-      }
-    });
+    // final loginUseCase = sl<Login>();
+    // loginUseCase(
+    //   Credentials(username: 'a', password: 'b'),
+    // ).then((result) {
+    //   if (result.asError?.error == LoginErrors.INVALID_CREDENTIALS.error) {
+    //     print('INVALID_CREDENTIALS');
+    //   }
+    // });
 
-    // throw const SocketException('test abc');
+    throw const SocketException('test abc');
   }
 
   void throwUnexpectedException() {
