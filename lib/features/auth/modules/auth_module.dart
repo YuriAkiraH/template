@@ -9,7 +9,7 @@ class AuthModule extends FeatureModule {
 
   @override
   void registerControllers() {
-    sl.registerFactory(() => LoginController());
+    sl.registerFactory(() => LoginController(sl()));
   }
 
   @override
