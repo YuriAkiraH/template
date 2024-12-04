@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:template/features/auth/presentation/controller/login_controller.dart';
 
 class LoginPage extends StatefulWidget {
@@ -21,59 +22,91 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(),
       body: Form(
         key: widget.controller.formKey,
-        child: Padding(
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: false,
+          physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Welcome', style: Theme.of(context).textTheme.headlineLarge),
-              const SizedBox(height: 32),
-              TextFormField(
-                controller: widget.controller.usernameTEC,
-                decoration: const InputDecoration(labelText: 'Username'),
-                validator: (value) =>
-                    widget.controller.usernameValidator(value),
-              ),
-              const SizedBox(height: 8),
-              TextFormField(
-                controller: widget.controller.passwordTEC,
-                decoration: const InputDecoration(labelText: 'Password'),
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                validator: (value) =>
-                    widget.controller.passwordValidator(value),
-              ),
-              const SizedBox(height: 64),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton(
-                  onPressed: () {
-                    widget.controller.login(
-                      widget.controller.usernameTEC.text,
-                      widget.controller.passwordTEC.text,
+          children: [
+            const SizedBox(height: 64),
+            Text(
+              'Welcome',
+              style: Theme.of(context).textTheme.headlineLarge,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 64),
+            TextFormField(
+              controller: widget.controller.usernameTEC,
+              decoration: const InputDecoration(labelText: 'Username'),
+              validator: (value) => widget.controller.usernameValidator(value),
+            ),
+            const SizedBox(height: 8),
+            TextFormField(
+              controller: widget.controller.passwordTEC,
+              decoration: const InputDecoration(labelText: 'Password'),
+              obscureText: true,
+              enableSuggestions: false,
+              autocorrect: false,
+              validator: (value) => widget.controller.passwordValidator(value),
+            ),
+            const SizedBox(height: 64),
+            Observer(
+              builder: (_) => Visibility(
+                // visible: widget.controller.errorMessage.isNotEmpty,
+                visible: true,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: widget.controller.errorMessage.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(
+                        widget.controller.errorMessage[index],
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Theme.of(context).colorScheme.error,
+                            ),
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(
+                          Icons.close_rounded,
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                        onPressed: () {
+                          widget.controller.errorMessage.removeAt(index);
+                        },
+                      ),
                     );
                   },
-                  child: Text('Login'),
                 ),
               ),
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  onPressed: () {},
-                  child: Text('Register'),
-                ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton(
+                onPressed: () {
+                  widget.controller.login(
+                    widget.controller.usernameTEC.text,
+                    widget.controller.passwordTEC.text,
+                  );
+                },
+                child: Text('Login'),
               ),
-              SizedBox(
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text('Forgot password?'),
-                ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton(
+                onPressed: () {},
+                child: Text('Register'),
               ),
-              const SizedBox(height: 258),
-            ],
-          ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: TextButton(
+                onPressed: () {},
+                child: Text('Forgot password?'),
+              ),
+            ),
+            const SizedBox(height: 258),
+          ],
         ),
       ),
     );
