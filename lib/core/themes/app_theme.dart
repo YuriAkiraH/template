@@ -1,8 +1,12 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:template/main_app.dart';
 
 sealed class AppTheme {
+  static TextTheme get text => Theme.of(MainApp.context).textTheme;
+  static ColorScheme get color => Theme.of(MainApp.context).colorScheme;
+
   // The defined light theme.
   static ThemeData light = FlexThemeData.light(
     scheme: FlexScheme.sakura,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:template/core/themes/app_theme.dart';
 import 'package:template/features/auth/presentation/controller/login_controller.dart';
 
 class LoginPage extends StatefulWidget {
@@ -31,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 64),
             Text(
               'Welcome',
-              style: Theme.of(context).textTheme.headlineLarge,
+              style: AppTheme.text.headlineLarge,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 64),
@@ -61,14 +62,14 @@ class _LoginPageState extends State<LoginPage> {
                     return ListTile(
                       title: Text(
                         widget.controller.errorMessage[index],
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.error,
-                            ),
+                        style: AppTheme.text.bodyMedium?.copyWith(
+                          color: AppTheme.color.error,
+                        ),
                       ),
                       trailing: IconButton(
                         icon: Icon(
                           Icons.close_rounded,
-                          color: Theme.of(context).colorScheme.error,
+                          color: AppTheme.color.error,
                         ),
                         onPressed: () {
                           widget.controller.errorMessage.removeAt(index);
